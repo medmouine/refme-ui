@@ -1,0 +1,118 @@
+html {
+  box-sizing: border-box;
+  font-size: $fontSizeRoot;
+  line-height: $lineHeightRoot;
+  overflow-x: hidden;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: font(light);
+  font-size: inherit;
+  -webkit-font-smoothing: antialiased;
+  height: 100%;
+  line-height: inherit;
+  margin: 0;
+  width: 100%;
+  @include fontSize(small);
+
+  @include mq(medium) {
+    @include fontSize(base);
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-bottom: rem(5px);
+}
+
+input,
+textarea,
+select,
+button {
+  font-size: inherit;
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+p {
+  margin: 0;
+}
+
+p + p {
+  margin-top: rem(15px);
+
+  @include mq(small) {
+    margin-top: rem(20px);
+  }
+}
+
+hr {
+  background-color: color(shape, base);
+  border: none;
+  height: 1px;
+  margin: rem(30px) 0;
+
+  @include mq(small) {
+    margin: rem(40px) 0;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+svg {
+  box-sizing: border-box;
+  display: inline-block;
+  fill: currentColor;
+  height: auto;
+  width: auto;
+
+  &[role="icon"] {
+    height: 1em;
+    vertical-align: middle;
+    width: 1em;
+  }
+}
+
+::-webkit-input-placeholder {
+  color: color(text);
+  opacity: get($formFieldStyleConfig, placeholderOpacity);
+}
+
+::-moz-placeholder {
+  color: color(text);
+  opacity: get($formFieldStyleConfig, placeholderOpacity);
+}
+
+:-ms-input-placeholder {
+  color: color(text);
+  opacity: get($formFieldStyleConfig, placeholderOpacity);
+}
+
+:-moz-placeholder {
+  color: color(text);
+  opacity: get($formFieldStyleConfig, placeholderOpacity);
+}
+
+::-ms-clear {
+  display: none;
+}

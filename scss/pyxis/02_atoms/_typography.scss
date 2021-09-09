@@ -1,0 +1,36 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: font(heavy);
+}
+
+h1 {
+  @include fontSize(xlarge);
+
+  @include mq(large) {
+    @include fontSize(xxlarge);
+  }
+}
+
+h2 {
+  @include fontSize(large);
+
+  @include mq(large) {
+    @include fontSize(xlarge);
+  }
+}
+
+h3 {
+  @include fontSize(medium);
+
+  @include mq(medium) {
+    @include fontSize(large);
+  }
+}
+
+h4 {
+  @include fontSize(base);
+}

@@ -1,0 +1,36 @@
+{
+  "name": "refme-ui",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "postinstall": "elm-tooling install",
+    "format:elm": "elm-format src --yes",
+    "format:css": "prettier --write --ignore-unknown ./",
+    "format": "run-p format:css format:elm",
+    "build:elm": "elm make ./src/Main.elm --output ./public/dist/elm.js --optimize",
+    "build:css": "node-sass-chokidar scss/ -o public/dist/css/ --output-style compressed",
+    "build": "run-p build:css build:elm ",
+    "watch:css": "yarn build:css && node-sass-chokidar scss/ -o public/dist/css/ -w -r --output-style compressed",
+    "watch:elm": "chokidar './src/**/*.elm' -c 'yarn build:elm' — initial",
+    "server:dev": "browser-sync 'http://localhost:8080?' './public' -w --port 8080",
+    "dev": "run-p watch:css watch:elm server:dev",
+    "test": "elm-test",
+    "prepare": "husky install"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.27.5",
+    "chokidar-cli": "^3.0.0",
+    "elm-format": "^0.8.5",
+    "elm-tooling": "^1.4.1",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
+    "node-sass-chokidar": "^1.5.0",
+    "prettier": "^2.4.0",
+    "yarn-run-all": "^3.1.1"
+  },
+  "lint-staged": {
+    "**/*": "yarn format"
+  }
+}

@@ -1,0 +1,236 @@
+$modalConfig: (
+  backgroundColor: color(background),
+  borderRadius: rem(10px),
+  maxHeight: calc(100vh - #{rem(20px)}),
+  maxWidth: calc(100% - #{rem(20px)}),
+  header: (
+    paddingLeft: rem(40px),
+    paddingRight: rem(40px),
+  ),
+  close: (
+    backgroundColor: transparent,
+    borderColor: color(shape),
+    borderWidth: rem(1px),
+    hover: (
+      backgroundColor: rgba(color(brandAlt), 0.1),
+      borderColor: color(brandAlt, dark),
+    ),
+  ),
+  overlay: (
+    backgroundColor: rgba(color(backgroundAlt, dark), 0.7),
+  ),
+  footer: (
+    paddingTop: rem(20px),
+  ),
+  breakpoints: (
+    base: (
+      padding: rem(20px),
+      title: (
+        fontSize: medium,
+        paddingTop: rem(3px),
+        paddingBottom: rem(10px),
+      ),
+      content: (
+        fontSize: small,
+      ),
+      close: (
+        size: rem(30px),
+      ),
+    ),
+    small: (
+      padding: rem(30px),
+      title: (
+        fontSize: large,
+        paddingTop: rem(6px),
+        paddingBottom: rem(20px),
+      ),
+      content: (
+        fontSize: base,
+      ),
+      close: (
+        size: rem(40px),
+      ),
+    ),
+  ),
+) !default;
+
+$modalSize: (
+  small: (
+    width: rem(500px),
+  ),
+  medium: (
+    width: rem(800px),
+  ),
+  large: (
+    width: rem(1000px),
+  ),
+) !default;
+
+$modalKind: (
+  light: (
+    backgroundColor: color(background),
+    contentColor: color(text, dark),
+    title: (
+      color: color(text, dark),
+    ),
+    icon: (
+      backgroundColor: color(shape, dark),
+      borderColor: color(shape),
+    ),
+    hover: (
+      borderColor: color(brandAlt),
+    ),
+  ),
+  dark: (
+    backgroundColor: color(backgroundAlt, light),
+    contentColor: color(textAlt, light),
+    title: (
+      color: color(textAlt, light),
+    ),
+    icon: (
+      backgroundColor: color(background),
+      borderColor: color(background),
+    ),
+    hover: (
+      borderColor: color(brandAlt),
+    ),
+  ),
+) !default;
+
+@mixin modalKind($kind) {
+  background-color: get($modalKind, $kind, backgroundColor);
+
+  .modal__header__title {
+    color: get($modalKind, $kind, title, color);
+  }
+
+  .modal__content {
+    color: get($modalKind, $kind, contentColor);
+  }
+
+  .modal__header__close {
+    border-color: get($modalKind, $kind, icon, borderColor);
+  }
+
+  .modal__header__close:before,
+  .modal__header__close:after {
+    background-color: get($modalKind, $kind, icon, backgroundColor);
+  }
+}
+
+.modal {
+  background: get($modalConfig, overlay, backgroundColor);
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: zIndex(modal);
+}
+
+.modal__wrapper {
+  @include modalKind(light);
+  align-items: center;
+  border-radius: get($modalConfig, borderRadius);
+  display: flex;
+  flex-direction: column;
+  left: 50%;
+  max-height: get($modalConfig, maxHeight);
+  max-width: get($modalConfig, maxWidth);
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  width: 100%;
+
+  @each $bp, $bpConfig in get($modalConfig, breakpoints) {
+    @include mq($bp) {
+      padding: get($bpConfig, padding);
+    }
+  }
+
+  .modal--small & {
+    @include mq(small) {
+      width: get($modalSize, small, width);
+    }
+  }
+
+  .modal--medium & {
+    @include mq(small) {
+      width: get($modalSize, medium, width);
+    }
+  }
+
+  .modal--large & {
+    @include mq(small) {
+      width: get($modalSize, large, width);
+    }
+  }
+
+  .modal--dark & {
+    @include modalKind(dark);
+  }
+}
+
+.modal__header {
+  padding-left: get($modalConfig, header, paddingLeft);
+  padding-right: get($modalConfig, header, paddingRight);
+  position: relative;
+  width: 100%;
+}
+
+.modal__header__title {
+  margin: 0;
+
+  @each $bp, $bpConfig in get($modalConfig, breakpoints) {
+    @include mq($bp) {
+      @include fontSize(get($bpConfig, title, fontSize));
+      padding-bottom: get($bpConfig, title, paddingBottom);
+      padding-top: get($bpConfig, title, paddingTop);
+    }
+  }
+}
+
+.modal__content {
+  overflow-y: scroll;
+  width: 100%;
+
+  @each $bp, $bpConfig in get($modalConfig, breakpoints) {
+    @include mq($bp) {
+      @include fontSize(get($bpConfig, content, fontSize));
+    }
+  }
+}
+
+.modal__header__close {
+  @include iconClose(color(shape, dark));
+  align-items: center;
+  background-color: get($modalConfig, close, backgroundColor);
+  border-radius: 50%;
+  border-style: solid;
+  border-width: get($modalConfig, close, borderWidth);
+  color: color(brandAlt, dark);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+  @each $bp, $bpConfig in get($modalConfig, breakpoints) {
+    @include mq($bp) {
+      height: get($bpConfig, close, size);
+      width: get($bpConfig, close, size);
+    }
+  }
+
+  &:hover {
+    background-color: get($modalConfig, close, hover, backgroundColor);
+    border-color: get($modalConfig, close, hover, borderColor);
+  }
+}
+
+.modal__footer {
+  padding-top: get($modalConfig, footer, paddingTop);
+}

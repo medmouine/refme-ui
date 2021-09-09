@@ -1,0 +1,59 @@
+.container {
+  display: flex;
+  margin: 0 auto;
+
+  @each $item in $containers {
+    @each $bpKey, $bpSize in $breakpoints {
+      @include mq($bpKey) {
+        max-width: get($containers, $bpKey);
+        width: 100%;
+      }
+    }
+  }
+}
+
+.container-fluid {
+  display: flex;
+  margin: 0 auto;
+  width: 100%;
+}
+
+$bpIndex: 1;
+$bpLength: length($breakpoints);
+@each $bpKey, $bpSize in $breakpoints {
+  .container--on-bp-#{$bpKey} {
+    @if ($bpIndex + 1) <= $bpLength {
+      $nextBpKey: nth(nth($breakpoints, ($bpIndex + 1)), 1);
+      @include mqBetween($bpKey, $nextBpKey) {
+        max-width: get($containers, $bpKey);
+        width: 100%;
+      }
+    } @else {
+      @include mq($bpKey) {
+        max-width: get($containers, $bpKey);
+        width: 100%;
+      }
+    }
+  }
+  $bpIndex: $bpIndex + 1;
+}
+
+$bpIndex: 1;
+$bpLength: length($breakpoints);
+@each $bpKey, $bpSize in $breakpoints {
+  .container-fluid--on-bp-#{$bpKey} {
+    @if ($bpIndex + 1) <= $bpLength {
+      $nextBpKey: nth(nth($breakpoints, ($bpIndex + 1)), 1);
+      @include mqBetween($bpKey, $nextBpKey) {
+        max-width: 100%;
+        width: 100%;
+      }
+    } @else {
+      @include mq($bpKey) {
+        max-width: 100%;
+        width: 100%;
+      }
+    }
+  }
+  $bpIndex: $bpIndex + 1;
+}

@@ -1,0 +1,590 @@
+$buttonSizeConfig: (
+  base: (
+    borderRadius: rem(80px),
+    borderWidth: rem(2px),
+    height: rem(40px),
+    minWidth: rem(160px),
+    fontSize: size(small),
+    lineHeight: rem(38px),
+    paddingTop: 0,
+    paddingRight: rem(25px),
+    paddingBottom: 0,
+    paddingLeft: rem(25px),
+  ),
+  small: (
+    borderRadius: rem(80px),
+    borderWidth: rem(2px),
+    height: rem(36px),
+    minWidth: rem(130px),
+    fontSize: size(xsmall),
+    lineHeight: rem(34px),
+    paddingTop: 0,
+    paddingRight: rem(25px),
+    paddingBottom: 0,
+    paddingLeft: rem(25px),
+  ),
+  tiny: (
+    borderRadius: rem(80px),
+    borderWidth: rem(2px),
+    height: rem(28px),
+    minWidth: rem(100px),
+    fontSize: size(xsmall),
+    lineHeight: rem(26px),
+    paddingTop: 0,
+    paddingRight: rem(15px),
+    paddingBottom: 0,
+    paddingLeft: rem(15px),
+  ),
+) !default;
+
+$buttonLoaderConfig: (
+  strokeColor: color(background),
+);
+
+$callOutButtonConfig: (
+  background: color(action),
+  borderColor: transparent,
+  color: color(textAlt, light),
+  strokeColor: color(textAlt, light),
+  hover: (
+    background: color(action, dark),
+    borderColor: transparent,
+    color: color(textAlt, light),
+  ),
+  disabled: (
+    background: color(action),
+    borderColor: transparent,
+    color: color(textAlt, light),
+    opacity: 0.3,
+  ),
+) !default;
+
+$primaryButtonConfig: (
+  background: color(brandAlt),
+  borderColor: transparent,
+  color: color(textAlt, light),
+  strokeColor: color(textAlt, light),
+  hover: (
+    background: color(brandAlt, dark),
+    borderColor: transparent,
+    color: color(textAlt, light),
+  ),
+  disabled: (
+    background: rgba(color(shape, base), 0.3),
+    borderColor: transparent,
+    color: rgba(color(text, dark), 0.5),
+    opacity: 1,
+  ),
+) !default;
+
+$primaryAltButtonConfig: (
+  background: color(background),
+  borderColor: transparent,
+  color: color(text, dark),
+  strokeColor: color(text, dark),
+  hover: (
+    background: rgba(color(background), 0.8),
+    borderColor: transparent,
+    color: color(text, dark),
+  ),
+  disabled: (
+    background: rgba(color(shape, base), 0.15),
+    borderColor: transparent,
+    color: rgba(color(text, light), 0.4),
+    opacity: 1,
+  ),
+) !default;
+
+$secondaryButtonConfig: (
+  background: transparent,
+  borderColor: color(brandAlt),
+  color: color(brandAlt),
+  strokeColor: color(brandAlt),
+  hover: (
+    background: rgba(color(brandAlt), 0.1),
+    borderColor: color(brandAlt),
+    color: color(brandAlt),
+  ),
+  disabled: (
+    background: rgba(color(shape, base), 0.3),
+    borderColor: transparent,
+    color: rgba(color(text, dark), 0.5),
+    opacity: 1,
+  ),
+) !default;
+
+$secondaryAltButtonConfig: (
+  background: transparent,
+  borderColor: color(background),
+  color: color(background),
+  strokeColor: color(background),
+  hover: (
+    background: rgba(color(background), 0.1),
+    borderColor: rgba(color(background), 0.8),
+    color: rgba(color(background), 0.8),
+  ),
+  disabled: (
+    background: rgba(color(shape, base), 0.15),
+    borderColor: transparent,
+    color: rgba(color(text, light), 0.4),
+    opacity: 1,
+  ),
+) !default;
+
+$tertiaryButtonConfig: (
+  background: transparent,
+  borderColor: color(shape),
+  color: color(brandAlt),
+  strokeColor: color(brandAlt),
+  hover: (
+    background: rgba(color(brandAlt), 0.1),
+    borderColor: color(brandAlt),
+    color: color(brandAlt),
+  ),
+  disabled: (
+    background: rgba(color(shape, base), 0.3),
+    borderColor: transparent,
+    color: rgba(color(text, dark), 0.5),
+    opacity: 1,
+  ),
+) !default;
+
+$tertiaryAltButtonConfig: (
+  background: transparent,
+  borderColor: rgba(color(background), 0.5),
+  color: color(background),
+  strokeColor: color(background),
+  hover: (
+    background: rgba(color(background), 0.1),
+    borderColor: rgba(color(background), 0.3),
+    color: rgba(color(background), 0.8),
+  ),
+  disabled: (
+    background: rgba(color(shape, base), 0.15),
+    borderColor: transparent,
+    color: rgba(color(text, light), 0.4),
+    opacity: 1,
+  ),
+) !default;
+
+$downloadButtonConfig: (
+  backgroundColor: color(background),
+  borderColor: color(shape),
+  borderRadius: rem(8px),
+  borderWidth: rem(1px),
+  letterSpacing: 0,
+  paddingBottom: rem(10px),
+  paddingLeft: rem(70px),
+  paddingRight: rem(20px),
+  paddingTop: rem(14px),
+  icon: (
+    color: color(brandAlt),
+    fontSize: rem(30px),
+    size: rem(68px),
+  ),
+  title: (
+    color: color(text, dark),
+    fontFamily: font(base),
+    fontSize: base,
+    lineHeight: small,
+  ),
+  subtitle: (
+    color: color(brandAlt),
+    fontFamily: font(light),
+    fontSize: small,
+    lineHeight: xlarge,
+  ),
+  disabled: (
+    color: rgba(color(text, dark), 0.5),
+  ),
+);
+
+@mixin iconCallout($color) {
+  &:before {
+    background-color: $color;
+    content: "";
+    height: rem(1px);
+    opacity: 0;
+    position: absolute;
+    right: rem(20px);
+    top: calc(50% - #{rem(1px)});
+    transition: all 0.2s ease-in-out;
+    width: rem(10px);
+  }
+
+  &:after {
+    align-items: center;
+    border-bottom: rem(1px) solid $color;
+    border-right: rem(1px) solid $color;
+    content: "";
+    height: rem(7px);
+    opacity: 0;
+    position: absolute;
+    right: rem(20px);
+    top: calc(50% - #{rem(4px)});
+    transform: rotate(-45deg);
+    transition: all 0.2s ease-in-out;
+    width: rem(7px);
+  }
+
+  &:hover {
+    &:before {
+      opacity: 1;
+      right: rem(15px);
+    }
+
+    &:after {
+      opacity: 1;
+      right: rem(15px);
+    }
+  }
+}
+
+@mixin buttonKind($map) {
+  background-color: get($map, background);
+  border-color: get($map, borderColor);
+  color: get($map, color);
+
+  &:hover {
+    @include mq(medium) {
+      background-color: get($map, hover, background);
+      border-color: get($map, hover, borderColor);
+      color: get($map, hover, color);
+    }
+  }
+
+  &[disabled],
+  &.is-disabled {
+    background-color: get($map, disabled, background);
+    border-color: get($map, disabled, borderColor);
+    color: get($map, disabled, color);
+    opacity: get($map, disabled, opacity);
+
+    &:before {
+      display: none;
+    }
+  }
+}
+
+@mixin buttonSize($size) {
+  border-radius: get($buttonSizeConfig, $size, borderRadius);
+  border-width: get($buttonSizeConfig, $size, borderWidth);
+  font-size: get($buttonSizeConfig, $size, fontSize);
+  height: get($buttonSizeConfig, $size, height);
+  min-width: get($buttonSizeConfig, $size, minWidth);
+  padding-bottom: get($buttonSizeConfig, $size, paddingBottom);
+  padding-left: get($buttonSizeConfig, $size, paddingLeft);
+  padding-right: get($buttonSizeConfig, $size, paddingRight);
+  padding-top: get($buttonSizeConfig, $size, paddingTop);
+
+  .btn__text {
+    line-height: get($buttonSizeConfig, $size, lineHeight);
+  }
+}
+
+.btn {
+  @include buttonSize(base);
+  border-style: solid;
+  cursor: pointer;
+  display: inline-block;
+  font-family: font(heavy);
+  justify-content: center;
+  letter-spacing: rem(0.8px);
+  line-height: 100%;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  transition: background 0.1s ease-in-out, border 0.1s ease-in-out,
+    color 0.1s ease-in-out, transform 0.2s ease-in-out;
+  white-space: nowrap;
+  will-change: background, border, color, transform;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &[disabled],
+  &.is-disabled {
+    pointer-events: none;
+  }
+
+  .btn__text {
+    font-family: font(heavy);
+    margin-top: rem(2px);
+    position: relative;
+    transition: transform 0.25s cubic-bezier(0.694, 0.048, 0.335, 1);
+    z-index: zIndex(buttonText);
+  }
+
+  &.is-flex {
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    display: flex;
+  }
+}
+
+.is-loading {
+  @include iconLoader(get($buttonLoaderConfig, strokeColor));
+
+  &:after {
+    animation: buttonLoader 1s linear infinite;
+  }
+
+  .btn__text {
+    margin-right: rem(10px);
+    transform: translateX(-10px);
+  }
+
+  @keyframes buttonLoader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
+}
+
+.btn--primary {
+  @include buttonKind($primaryButtonConfig);
+  transition: border-color ease 0s 0s, background-color ease 0s 0s,
+    transform 0.2s ease-in-out;
+
+  &:before {
+    background: get($primaryButtonConfig, hover, background);
+    border-radius: get($buttonSizeConfig, base, borderRadius);
+    content: "";
+    display: block;
+    height: get($buttonSizeConfig, base, height);
+    left: 0;
+    position: absolute;
+    top: 0;
+    transform: translate(-100%, 0);
+    transition: all cubic-bezier(0.694, 0.048, 0.335, 1) 0.4s;
+    width: 100%;
+  }
+
+  &:hover {
+    @include mq(medium) {
+      transition: border-color cubic-bezier(0.694, 0.048, 0.335, 1) 0.4s,
+        background-color ease 0.1s 0.4s, transform 0.2s ease-in-out;
+    }
+  }
+
+  &:hover:before {
+    @include mq(medium) {
+      transform: translate(0, 0);
+    }
+  }
+
+  @each $size, $sizeConfig in $buttonSizeConfig {
+    @if $size != base {
+      &.btn--#{$size}:before {
+        border-radius: get($sizeConfig, borderRadius);
+        height: get($sizeConfig, height);
+      }
+    }
+  }
+
+  &.is-loading {
+    @include iconLoader(get($primaryButtonConfig, strokeColor));
+  }
+}
+
+.btn--primary-alt {
+  @include buttonKind($primaryAltButtonConfig);
+
+  &.is-loading {
+    @include iconLoader(get($primaryAltButtonConfig, strokeColor));
+  }
+}
+
+.btn--secondary {
+  @include buttonKind($secondaryButtonConfig);
+
+  &.is-loading {
+    @include iconLoader(get($secondaryButtonConfig, strokeColor));
+  }
+}
+
+.btn--secondary-alt {
+  @include buttonKind($secondaryAltButtonConfig);
+
+  &.is-loading {
+    @include iconLoader(get($secondaryAltButtonConfig, strokeColor));
+  }
+}
+
+.btn--tertiary {
+  @include buttonKind($tertiaryButtonConfig);
+
+  &.is-loading {
+    @include iconLoader(get($tertiaryButtonConfig, strokeColor));
+  }
+}
+
+.btn--tertiary-alt {
+  @include buttonKind($tertiaryAltButtonConfig);
+
+  &.is-loading {
+    @include iconLoader(get($tertiaryAltButtonConfig, strokeColor));
+  }
+}
+
+.btn--callout {
+  @include buttonKind($callOutButtonConfig);
+  @include iconCallout(color(textAlt, light));
+
+  &:hover .btn__text {
+    @include mq(medium) {
+      transform: translateX(-10px);
+    }
+  }
+
+  &.btn--small {
+    @include iconCallout(color(textAlt, light));
+  }
+
+  &.is-loading {
+    @include iconLoader(get($callOutButtonConfig, strokeColor));
+
+    &:before {
+      content: none;
+    }
+    &:after {
+      opacity: 1;
+    }
+  }
+}
+
+.btn--loading {
+  @include buttonKind($callOutButtonConfig);
+  @include iconLoader(get($buttonLoaderConfig, strokeColor));
+
+  &:after {
+    animation: buttonLoader 1s linear infinite;
+  }
+
+  .btn__text {
+    margin-right: rem(10px);
+    transform: translateX(-10px);
+  }
+
+  @keyframes buttonLoader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
+}
+
+.btn--small {
+  @include buttonSize(small);
+}
+
+.btn--tiny {
+  @include buttonSize(tiny);
+}
+
+$btnsBreakpoints: xsmall small medium large;
+
+@each $lowerBound in $btnsBreakpoints {
+  $index: index($btnsBreakpoints, $lowerBound);
+  $upperBound: nth(nth($breakpoints, $index + 1), 1);
+
+  @if $upperBound {
+    .btn--small-on-breakpoint-#{$lowerBound} {
+      @if $lowerBound == xsmall {
+        @include mqDown(xsmall) {
+          @include buttonSize(small);
+        }
+      } @else {
+        @include mqBetween($lowerBound, $upperBound) {
+          @include buttonSize(small);
+        }
+      }
+    }
+
+    .btn--tiny-on-breakpoint-#{$lowerBound} {
+      @if $lowerBound == xsmall {
+        @include mqDown(xsmall) {
+          @include buttonSize(tiny);
+        }
+      } @else {
+        @include mqBetween($lowerBound, $upperBound) {
+          @include buttonSize(tiny);
+        }
+      }
+    }
+  }
+}
+
+.btn--download {
+  align-items: flex-start;
+  background-color: get($downloadButtonConfig, backgroundColor);
+  border-color: get($downloadButtonConfig, borderColor);
+  border-radius: get($downloadButtonConfig, borderRadius);
+  border-style: solid;
+  border-width: get($downloadButtonConfig, borderWidth);
+  display: flex;
+  flex-direction: column;
+  height: inherit;
+  justify-content: center;
+  letter-spacing: get($downloadButtonConfig, letterSpacing);
+  padding-bottom: get($downloadButtonConfig, paddingBottom);
+  padding-left: get($downloadButtonConfig, paddingLeft);
+  padding-right: get($downloadButtonConfig, paddingRight);
+  padding-top: get($downloadButtonConfig, paddingTop);
+  text-transform: none;
+}
+
+.btn--download__icon {
+  align-items: center;
+  color: get($downloadButtonConfig, icon, color);
+  display: flex;
+  font-size: get($downloadButtonConfig, icon, fontSize);
+  height: get($downloadButtonConfig, icon, size);
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: get($downloadButtonConfig, icon, size);
+
+  .btn--download[disabled] &,
+  .btn--download.is-disabled & {
+    color: get($downloadButtonConfig, disabled, color);
+  }
+}
+
+.btn--download__title {
+  @include fontSize(
+    get($downloadButtonConfig, title, fontSize),
+    get($downloadButtonConfig, title, lineHeight)
+  );
+  color: get($downloadButtonConfig, title, color);
+  font-family: get($downloadButtonConfig, title, fontFamily);
+
+  .btn--download[disabled] &,
+  .btn--download.is-disabled & {
+    color: get($downloadButtonConfig, disabled, color);
+  }
+}
+
+.btn--download__subtitle {
+  @include fontSize(
+    get($downloadButtonConfig, subtitle, fontSize),
+    get($downloadButtonConfig, subtitle, lineHeight)
+  );
+  color: get($downloadButtonConfig, subtitle, color);
+  font-family: get($downloadButtonConfig, subtitle, fontFamily);
+
+  .btn--download[disabled] &,
+  .btn--download.is-disabled & {
+    color: get($downloadButtonConfig, disabled, color);
+  }
+}

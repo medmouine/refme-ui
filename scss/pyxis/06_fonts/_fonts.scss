@@ -1,0 +1,16 @@
+@each $fontName, $fontFamily in $fonts {
+  $fileName: nth($fontFamily, 1);
+
+  @font-face {
+    font-display: swap;
+    font-family: $fileName;
+    font-style: normal;
+    font-weight: 400;
+    src: url("#{$fontPath}/#{$fileName}.woff2") format("woff2"),
+      url("#{$fontPath}/#{$fileName}.woff") format("woff"),
+      url("#{$fontPath}/#{$fileName}.ttf") format("truetype"),
+      url("#{$fontPath}/#{$fileName}.eot") format("embedded-opentype"),
+      url("#{$fontPath}/#{$fileName}.otf") format("opentype"),
+      url("#{$fontPath}/#{$fileName}.svg#avenirltstd-medium") format("svg");
+  }
+}

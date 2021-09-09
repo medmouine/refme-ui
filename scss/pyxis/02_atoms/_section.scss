@@ -1,0 +1,22 @@
+$sectionConfig: (
+  breakpoints: (
+    base: (
+      padding: rem(40px),
+    ),
+    small: (
+      padding: rem(60px),
+    ),
+    large: (
+      padding: rem(80px),
+    ),
+  ),
+);
+
+.section {
+  @each $bp, $bpConfig in get($sectionConfig, breakpoints) {
+    @include mq($bp) {
+      padding-bottom: get($bpConfig, padding);
+      padding-top: get($bpConfig, padding);
+    }
+  }
+}
